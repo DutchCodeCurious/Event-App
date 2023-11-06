@@ -1,34 +1,18 @@
 import React, { useState } from "react";
-import manLogo from "./images/1.png";
-
-{
-  /** 
-if (!userExists) {
-  fetch(`http://localhost:8000/users`, {
-    method: "POST",
-    headers: { "content-Type": "application/json" },
-    body: JSON.stringify(users),
-  });
-  console.log("User is made");
-}
-*/
-}
+import manLogo from "../images/man.png";
+import womanLogo from "../images/woman.png";
 
 const UserCheckComponent = () => {
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
   const [fullName, setFullname] = useState("");
-  const [userImage, setUserImage] = useState("");
+  const [name, setName] = useState("");
+  const [image, setImage] = useState(null);
   const [isMatch, setIsMatch] = useState(true);
-  const [userData, setUserDate] = useState("");
-  const users = userLoader();
 
-  const woman = "https://picsum.photos/id/64/200/300";
-  const man1 = "https://picsum.photos/id/91/200/300";
-
-  const handleExistingUser = async (full) => {
-    setIsMatch(true);
-    console.log(`${full} is found in the database`);
+  const handleDefaultImageSelection = async (event) => {
+    const selectedImage = event.target.value;
+    setImage(selectedImage);
   };
 
   const findUserIdByName = (name, db) => {
@@ -37,10 +21,6 @@ const UserCheckComponent = () => {
     );
 
     return user ? user.id : null;
-  };
-  const handleUserImageChange = (e) => {
-    setUserImage(e.target.value);
-    console.log("H" + userImage);
   };
 
   const handleFirstNameChange = (e) => {
@@ -53,11 +33,20 @@ const UserCheckComponent = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+
+    const userNames = await userLoader();
+
     const full = await (firstName + " " + lastName);
     setFullname(`${firstName} ${lastName}`);
-    const userNames = await users;
-    const names = userNames.map((item) => item.name.toLowerCase());
-    if (names.some((item) => item === fullName.toLowerCase())) {
+    setName(fullName);
+
+    const names = await userNames.map((item) => item.name.toLowerCase());
+    console.log(names);
+
+    const lowFullName = full.toLowerCase();
+    console.log("Test " + lowFullName);
+
+    if (names.some((item) => item === lowFullName)) {
       const userId = findUserIdByName(full, userNames);
       console.log(`${full} is found in the database answer is: ${userId}`);
     } else {
@@ -66,10 +55,27 @@ const UserCheckComponent = () => {
     }
   };
 
+  const handleSecondSubmit = async (e) => {
+    e.preventDefault();
+
+    const users = {
+      name,
+      image,
+    };
+
+    fetch(`http://localhost:8000/users`, {
+      method: "POST",
+      headers: { "content-Type": "application/json" },
+      body: JSON.stringify(users),
+    });
+
+    console.log("There is a new user made");
+  };
+
   return (
     <>
       {isMatch ? (
-        <>
+        <div className="user-check-form">
           <form onSubmit={handleSubmit}>
             <label>
               First Name:
@@ -91,59 +97,55 @@ const UserCheckComponent = () => {
             <br />
             <button type="submit">Submit</button>
           </form>
-        </>
+        </div>
       ) : (
-        <form onSubmit={handleSubmit}>
-          <label>
-            First Name:
-            <input
-              type="text"
-              value={firstName}
-              onChange={handleFirstNameChange}
-            />
-          </label>
-          <br />
-          <label>
-            Last Name:
-            <input
-              type="text"
-              value={lastName}
-              onChange={handleLastNameChange}
-            />
-          </label>
-          <br />
-          <input
-            type="file"
-            accept="image/*"
-            onChange={handleUserImageChange}
-          />
-          <br />
-          {/** 
-          <label>
-            Use Default Image:
+        <div className="user-check-form">
+          <form onSubmit={handleSubmit}>
+            <label>
+              First Name:
+              <input
+                type="text"
+                value={firstName}
+                onChange={handleFirstNameChange}
+              />
+            </label>
             <br />
-            <input
-              type="image"
-              name="Default man"
-              value={man}
-              src={man}
-              onClick={handleUserImageChange}
-            />
-            <input
-              type="image"
-              name="Default woman"
-              value={woman}
-              src={woman}
-              onClick={handleUserImageChange}
-            />
-          </label>
-          */}
-          <br />
-          <button type="submit" onChange={() => setIsMatch(!isMatch)}>
-            Submit
-          </button>
-          <img src={manLogo} />
-        </form>
+            <label>
+              Last Name:
+              <input
+                type="text"
+                value={lastName}
+                onChange={handleLastNameChange}
+              />
+            </label>
+            <br />
+            <label>
+              Choose Image:
+              <br />
+              <input
+                className="default-image"
+                type="image"
+                name="Default man"
+                value={manLogo}
+                src={manLogo}
+                onClick={handleDefaultImageSelection}
+              />
+              <input
+                className="default-image"
+                type="image"
+                name="Default woman"
+                value={womanLogo}
+                src={womanLogo}
+                onClick={handleDefaultImageSelection}
+              />
+            </label>
+
+            <br />
+            <button type="submit" onClick={handleSecondSubmit}>
+              Submit
+            </button>
+          </form>
+        </div>
       )}
     </>
   );
