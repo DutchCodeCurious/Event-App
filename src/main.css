@@ -131,3 +131,20 @@ button {
   color: white;
   border: none;
 }
+
+/* User check  */
+
+.default-image {
+  height: 50px;
+  width: auto;
+  border-radius: 45%;
+}
+
+.user-check-form {
+  display: flex;
+  justify-content: center;
+  height: 100vh;
+  margin: 0;
+  text-align: center;
+  margin-top: 50px;
+}

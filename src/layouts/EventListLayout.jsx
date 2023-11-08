@@ -9,7 +9,7 @@ export default function EventListLayout() {
     <div className="Event-List-Layout">
       <div className="head-bar">
         <h2>Events</h2>
-        <NavLink to="user">Add event</NavLink>
+        <NavLink to="form">Add event</NavLink>
       </div>
       <div>
         <main>

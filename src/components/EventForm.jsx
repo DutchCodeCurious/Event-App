@@ -83,12 +83,6 @@ export default function EventFrom() {
 
   return (
     <>
-      <p>
-        Lorem ipsum dolor sit amet consectetur, adipisicing elit. Eum quia
-        obcaecati itaque at? Alias animi mollitia ipsum facilis blanditiis
-        reiciendis nostrum dolorum ducimus? Libero, ab ad assumenda sequi omnis
-        voluptatibus!
-      </p>
       <h2>Fill all the details of the new event :</h2>
       <form onSubmit={handleSubmit} className="event-form">
         <label>Username:</label>

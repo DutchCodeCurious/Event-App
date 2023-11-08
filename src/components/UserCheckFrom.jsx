@@ -1,14 +1,16 @@
 import React, { useState } from "react";
 import manLogo from "../images/man.png";
 import womanLogo from "../images/woman.png";
+import EventFrom from "./EventForm";
 
-const UserCheckComponent = () => {
+const UserCheckComponent = ({ handleAction }) => {
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
   const [fullName, setFullname] = useState("");
   const [name, setName] = useState("");
   const [image, setImage] = useState(null);
   const [isMatch, setIsMatch] = useState(true);
+  const [isMade, setIsMade] = useState(false);
 
   const handleDefaultImageSelection = async (event) => {
     const selectedImage = event.target.value;
@@ -48,6 +50,8 @@ const UserCheckComponent = () => {
 
     if (names.some((item) => item === lowFullName)) {
       const userId = findUserIdByName(full, userNames);
+      handleAction();
+
       console.log(`${full} is found in the database answer is: ${userId}`);
     } else {
       setIsMatch(false);
@@ -68,7 +72,7 @@ const UserCheckComponent = () => {
       headers: { "content-Type": "application/json" },
       body: JSON.stringify(users),
     });
-
+    setIsMade(true);
     console.log("There is a new user made");
   };
 
@@ -83,6 +87,7 @@ const UserCheckComponent = () => {
                 type="text"
                 value={firstName}
                 onChange={handleFirstNameChange}
+                required
               />
             </label>
             <br />
@@ -92,6 +97,7 @@ const UserCheckComponent = () => {
                 type="text"
                 value={lastName}
                 onChange={handleLastNameChange}
+                required
               />
             </label>
             <br />
@@ -145,6 +151,11 @@ const UserCheckComponent = () => {
               Submit
             </button>
           </form>
+          {isMade ? (
+            <button onClick={handleAction}>Create event</button>
+          ) : (
+            <></>
+          )}
         </div>
       )}
     </>

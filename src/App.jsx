@@ -18,12 +18,15 @@ import UserCheckComponent, { userLoader } from "./components/UserCheckFrom";
 //layout
 import RootLayout from "./layouts/RootLayout";
 import EventListLayout, { eventsLoader } from "./layouts/EventListLayout";
+import FormLayout from "./layouts/FormLayout";
 
 const router = createBrowserRouter(
   createRoutesFromElements(
     <Route path="/" element={<RootLayout />}>
       <Route index element={<Home />} />
-      <Route path="form" element={<Form />} />
+      <Route path="events/form" element={<FormLayout />}>
+        <Route index element={<Form />} />
+      </Route>
 
       <Route path="events" element={<EventListLayout />}>
         <Route index element={<Events />} loader={eventsLoader} />
