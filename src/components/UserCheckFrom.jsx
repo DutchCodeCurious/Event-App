@@ -1,16 +1,14 @@
 import React, { useState } from "react";
 import manLogo from "../images/man.png";
 import womanLogo from "../images/woman.png";
-import EventFrom from "./EventForm";
 
-const UserCheckComponent = ({ handleAction }) => {
+const UserCheckComponent = ({ handleAction, getInfo }) => {
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
   const [fullName, setFullname] = useState("");
   const [name, setName] = useState("");
   const [image, setImage] = useState(null);
   const [isMatch, setIsMatch] = useState(true);
-  const [isMade, setIsMade] = useState(false);
 
   const handleDefaultImageSelection = async (event) => {
     const selectedImage = event.target.value;
@@ -50,6 +48,8 @@ const UserCheckComponent = ({ handleAction }) => {
 
     if (names.some((item) => item === lowFullName)) {
       const userId = findUserIdByName(full, userNames);
+
+      getInfo(full);
       handleAction();
 
       console.log(`${full} is found in the database answer is: ${userId}`);
@@ -72,7 +72,8 @@ const UserCheckComponent = ({ handleAction }) => {
       headers: { "content-Type": "application/json" },
       body: JSON.stringify(users),
     });
-    setIsMade(true);
+    getInfo(name);
+    handleAction();
     console.log("There is a new user made");
   };
 
@@ -151,11 +152,6 @@ const UserCheckComponent = ({ handleAction }) => {
               Submit
             </button>
           </form>
-          {isMade ? (
-            <button onClick={handleAction}>Create event</button>
-          ) : (
-            <></>
-          )}
         </div>
       )}
     </>

@@ -25,7 +25,7 @@ const router = createBrowserRouter(
     <Route path="/" element={<RootLayout />}>
       <Route index element={<Home />} />
       <Route path="events/form" element={<FormLayout />}>
-        <Route index element={<Form />} />
+        <Route index element={<Form />} loader={userLoader} />
       </Route>
 
       <Route path="events" element={<EventListLayout />}>

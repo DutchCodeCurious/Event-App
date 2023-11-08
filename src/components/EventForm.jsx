@@ -5,22 +5,24 @@ import {
   getCategoryId,
 } from "../functions/checkData";
 
-export default function EventFrom() {
-  const [name, setName] = useState("");
+export default function EventFrom({ username }) {
+  const [name, setName] = useState(username);
   const [title, setTitle] = useState("");
   const [description, setDiscription] = useState("");
-  const [image, setImage] = useState(
-    "https://picsum.photos/seed/picsum/200/300"
-  );
+  const [image, setImage] = useState("");
   const [categoryName, setCategoryName] = useState("");
   const [location, setLocation] = useState("");
   const [startTime, setStartTime] = useState("");
   const [endTime, setEndTime] = useState("");
 
+  const handleImage = (e) => {
+    setImage(e.target.value || "https://picsum.photos/seed/picsum/200/300");
+  };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     const events = {
-      title,
+      createdBy: title,
       description,
       image,
       location,
@@ -87,12 +89,13 @@ export default function EventFrom() {
       <form onSubmit={handleSubmit} className="event-form">
         <label>Username:</label>
         <input
-          placeholder="Name"
+          placeholder={username}
           type="text"
           required
           name="name"
           value={name}
-          onChange={(e) => setName(e.target.value)}
+          onChange={() => setName(username)}
+          readOnly
         />
         <label>Event name:</label>
         <input
@@ -106,17 +109,13 @@ export default function EventFrom() {
         <label>description:</label>
         <textarea
           placeholder="Jump around in a castle..."
+          required
           name="description"
           value={description}
           onChange={(e) => setDiscription(e.target.value)}
         />
         <label>Image (optional)</label>
-        <input
-          type="url"
-          name="image"
-          value={image}
-          onChange={(e) => setImage(e.target.value)}
-        />
+        <input type="url" name="image" value={image} onChange={handleImage} />
         Category
         <input
           type="text"

@@ -148,3 +148,26 @@ button {
   text-align: center;
   margin-top: 50px;
 }
+
+/* userCard */
+
+.user-card {
+  display: flex;
+  justify-content: center;
+  height: 100vh;
+  margin: 0;
+  text-align: left;
+  margin-top: 50px;
+}
+
+.user-card img {
+  max-height: 50px;
+}
+
+/* create event and check right user */
+
+.last-user-check {
+  display: flex;
+  justify-content: center;
+  height: 300px;
+}
