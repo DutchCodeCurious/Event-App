@@ -26,10 +26,10 @@ const getCategoryId = async (checkCategoryName) => {
   const catRes = await fetch(
     `http://localhost:8000/categories?name=${checkCategoryName}`
   );
-  const cat = catRes.json();
-  const categoryId = cat.id;
-  console.log("Outside function" + categoryId);
+  const cat = await catRes.json();
+  // const categoryId = cat[0].id;
+  console.log(cat[0].id);
+  return cat[0].id;
 };
-
 
 export { checkCategoryExists, checkUserExists, getCategoryId };

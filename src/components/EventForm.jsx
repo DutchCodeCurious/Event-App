@@ -1,12 +1,8 @@
 import { useState } from "react";
-import {
-  checkCategoryExists,
-  checkUserExists,
-  getCategoryId,
-} from "../functions/checkData";
+import { checkCategoryExists, getCategoryId } from "../functions/checkData";
 
-export default function EventFrom({ username }) {
-  const [name, setName] = useState(username);
+export default function EventFrom({ userName, userId }) {
+  const [name, setName] = useState(userName);
   const [title, setTitle] = useState("");
   const [description, setDiscription] = useState("");
   const [image, setImage] = useState("");
@@ -14,27 +10,10 @@ export default function EventFrom({ username }) {
   const [location, setLocation] = useState("");
   const [startTime, setStartTime] = useState("");
   const [endTime, setEndTime] = useState("");
+  const [categoryId, setCategoryId] = useState("");
 
-  const handleImage = (e) => {
-    setImage(e.target.value || "https://picsum.photos/seed/picsum/200/300");
-  };
-
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    const events = {
-      createdBy: title,
-      description,
-      image,
-      location,
-      startTime,
-      endTime,
-    };
-
-    const users = {
-      name,
-      image: "https://picsum.photos/id/237/200/300",
-    };
-
+  async function updateCategoryId(categoryName) {
+    setCategoryName(categoryName);
     const categorie = {
       name: categoryName,
     };
@@ -46,12 +25,45 @@ export default function EventFrom({ username }) {
         headers: { "content-Type": "application/json" },
         body: JSON.stringify(categorie),
       });
-      console.log("Category is made");
     }
-
     const categoryIds = await getCategoryId(categoryName);
-    console.log(categoryIds);
+    if (categoryIds !== undefined) {
+      setCategoryId(categoryIds);
+      console.log("state: " + categoryId);
+      console.log("Category is made");
+    } else {
+      const categoryIds = await getCategoryId(categoryName);
+      setCategoryId(categoryIds);
+      console.log("state: " + categoryId);
+    }
+  }
+  const handleImage = (e) => {
+    setImage(e.target.value || "https://picsum.photos/seed/picsum/200/300");
+  };
 
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    const events = {
+      createdBy: userId,
+      title,
+      description,
+      image,
+      categoryIds: categoryId,
+      location,
+      startTime,
+      endTime,
+    };
+    {
+      /** 
+    const users = {
+      name,
+      image: "https://picsum.photos/id/237/200/300",
+    };
+*/
+    }
+    {
+      /** 
     const userExists = await checkUserExists(name);
     if (!userExists) {
       fetch(`http://localhost:8000/users`, {
@@ -73,14 +85,15 @@ export default function EventFrom({ username }) {
       headers: { "content-Type": "application/json" },
       body: JSON.stringify(categorie),
     });
-
+*/
+    }
     fetch(`http://localhost:8000/events`, {
       method: "POST",
       headers: { "content-Type": "application/json" },
       body: JSON.stringify(events),
     });
 
-    console.log(events, users, categorie);
+    console.log(events);
   };
 
   return (
@@ -89,12 +102,12 @@ export default function EventFrom({ username }) {
       <form onSubmit={handleSubmit} className="event-form">
         <label>Username:</label>
         <input
-          placeholder={username}
+          placeholder={userName}
           type="text"
           required
           name="name"
           value={name}
-          onChange={() => setName(username)}
+          onChange={() => setName(userName)}
           readOnly
         />
         <label>Event name:</label>
@@ -121,7 +134,7 @@ export default function EventFrom({ username }) {
           type="text"
           name="categories"
           value={categoryName}
-          onChange={(e) => setCategoryName(e.target.value)}
+          onSubmit={(e) => updateCategoryId(e.target.value)}
         />
         <label>Location</label>
         <input

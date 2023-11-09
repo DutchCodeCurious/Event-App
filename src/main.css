@@ -32,6 +32,7 @@ header nav {
 }
 header nav h1 {
   margin-right: auto;
+  justify-content: left;
   border-bottom: 3px solid var(--primary);
 }
 header nav a {

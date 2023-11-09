@@ -36,10 +36,19 @@ const UserCheckComponent = ({ handleAction, getInfo }) => {
 
     const userNames = await userLoader();
 
-    const full = await (firstName + " " + lastName);
-    setFullname(`${firstName} ${lastName}`);
+    const fName = await firstName;
+    const lName = await lastName;
+    const full =
+      fName.charAt(0).toUpperCase() +
+      fName.slice(1) +
+      " " +
+      lName.charAt(0).toUpperCase() +
+      lName.slice(1);
+
+    setFullname(full);
     setName(fullName);
 
+    console.log(full);
     const names = await userNames.map((item) => item.name.toLowerCase());
     console.log(names);
 

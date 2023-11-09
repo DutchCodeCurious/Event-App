@@ -8,9 +8,10 @@ export default function Form() {
   const [showUserCheck, setShowUserCheck] = useState(true);
   const [showUserCard, setShowUserCard] = useState(false);
   const [showForm, setShowForm] = useState(false);
-  const [username, setUsername] = useState("");
+  const [userName, setUsername] = useState("");
   const [userImage, setUserImage] = useState("");
   const [userId, setUserId] = useState("");
+
   const handleAction = () => {
     setShowUserCard(true);
     setShowUserCheck(false);
@@ -21,16 +22,21 @@ export default function Form() {
     setShowForm(true);
   };
   const getUserData = async (name) => {
-    const users = await userLoader();
-    const user = users.find((obj) => obj.name === name);
+    console.log("Test userData function; " + name);
+    const usersRes = await userLoader();
+    console.log(usersRes);
+    const user = usersRes.find((obj) => obj.name === name);
+    console.log(user);
+
     setUserImage(user.image);
     setUserId(user.id);
-    console.log(userId);
   };
 
   const getInfo = (name) => {
-    setUsername(name);
-    getUserData(name);
+    const realName = name.charAt(0).toUpperCase() + name.slice(1);
+    console.log(realName);
+    setUsername(realName);
+    getUserData(realName);
   };
 
   return (
@@ -40,11 +46,11 @@ export default function Form() {
       )}
       {showUserCard && (
         <div className="last-user-check">
-          <UserCard userName={username} userImage={userImage} />
+          <UserCard userName={userName} userImage={userImage} />
           <button onClick={handleCreate}>Create event</button>
         </div>
       )}
-      {showForm && <EventFrom username={username} />}
+      {showForm && <EventFrom userName={userName} userId={userId} />}
     </div>
   );
 }

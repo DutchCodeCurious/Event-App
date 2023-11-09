@@ -5,10 +5,16 @@ export default function RootLayout() {
     <div className="root-layout">
       <header>
         <nav>
-          <h1>WincEvents</h1>
-          <NavLink to="/">Home</NavLink>
-          <NavLink to="events">Events</NavLink>
-          <NavLink to="form">Form</NavLink>
+          <NavLink to="/" className="title">
+            <h1>WincEvents</h1>
+          </NavLink>
+
+          <NavLink className="buttons-head" to="/">
+            Home
+          </NavLink>
+          <NavLink className="buttons-head" to="events">
+            Events
+          </NavLink>
         </nav>
       </header>
       <main>

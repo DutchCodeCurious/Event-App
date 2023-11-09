@@ -11,89 +11,9 @@
       "image": "https://global-uploads.webflow.com/5eecfecbe625d195e35b89f2/624bfb401d7131c760ca1c63_Elieska%20Lensink.jpg"
     },
     {
-      "name": "KLaas Vaak",
+      "name": "Test Zoveel",
       "image": "/src/images/man.png",
       "id": 3
-    },
-    {
-      "name": "Joppe Petrit",
-      "image": "/src/images/man.png",
-      "id": 4
-    },
-    {
-      "name": "Joppe Petrit",
-      "image": "/src/images/woman.png",
-      "id": 5
-    },
-    {
-      "name": "Test  Drie",
-      "image": "/src/images/man.png",
-      "id": 6
-    },
-    {
-      "name": "Die TEst",
-      "image": "/src/images/woman.png",
-      "id": 7
-    },
-    {
-      "name": "Laatste Test",
-      "image": "/src/images/woman.png",
-      "id": 8
-    },
-    {
-      "name": "Joppe KLaa",
-      "image": "/src/images/man.png",
-      "id": 9
-    },
-    {
-      "name": "ignacio sdsad",
-      "image": "/src/images/woman.png",
-      "id": 10
-    },
-    {
-      "name": "New User",
-      "image": "/src/images/man.png",
-      "id": 11
-    },
-    {
-      "name": "Hallo saasd",
-      "image": "/src/images/man.png",
-      "id": 12
-    },
-    {
-      "name": "test zoveel",
-      "image": "/src/images/man.png",
-      "id": 13
-    },
-    {
-      "name": "Hoe Gaat",
-      "image": "/src/images/man.png",
-      "id": 14
-    },
-    {
-      "name": "Hoe Gaat",
-      "image": "/src/images/man.png",
-      "id": 15
-    },
-    {
-      "name": "Hoe Gaat",
-      "image": "/src/images/man.png",
-      "id": 16
-    },
-    {
-      "name": "Laatste nieuw",
-      "image": "/src/images/woman.png",
-      "id": 17
-    },
-    {
-      "name": "test zoveel",
-      "image": "https://picsum.photos/id/237/200/300",
-      "id": 18
-    },
-    {
-      "name": "Jan Vaak",
-      "image": "/src/images/man.png",
-      "id": 19
     }
   ],
   "events": [
@@ -163,14 +83,6 @@
     {
       "name": "relaxation",
       "id": 3
-    },
-    {
-      "name": "Coding",
-      "id": 4
-    },
-    {
-      "name": "Coding",
-      "id": 5
     }
   ]
 }
