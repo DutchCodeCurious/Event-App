@@ -6,7 +6,7 @@ import {
 } from "react-router-dom";
 
 //data
-import { AllDataLoader } from "./functions/LoadAllData";
+// import { AllDataLoader } from "./functions/LoadAllData";
 
 //pages
 import Home from "./pages/Home";

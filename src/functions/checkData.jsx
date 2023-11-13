@@ -4,6 +4,7 @@ const checkCategoryExists = async (categoryName) => {
       `http://localhost:8000/categories?name=${categoryName}`
     );
     const data = await response.json();
+    console.log(data.id);
     console.log(data.length);
     return data.length > 0; // Geeft true terug als er categorieën zijn gevonden met dezelfde naam
   } catch (error) {

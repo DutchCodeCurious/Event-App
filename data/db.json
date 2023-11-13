@@ -14,6 +14,11 @@
       "name": "Test Zoveel",
       "image": "/src/images/man.png",
       "id": 3
+    },
+    {
+      "name": "Joppe Petit",
+      "image": "/src/images/man.png",
+      "id": 4
     }
   ],
   "events": [
@@ -69,6 +74,52 @@
       "location": "Shavasana Yoga School",
       "startTime": "2023-03-09T06:00:00.000Z",
       "endTime": "2023-03-09T07:00:00.000Z"
+    },
+    {
+      "createdBy": 4,
+      "title": "Verkiezing",
+      "description": "Stemmen",
+      "image": "",
+      "categoryIds": [],
+      "location": "gouda",
+      "startTime": "2023-11-21T14:48",
+      "endTime": "2023-11-23T14:48",
+      "id": 5
+    },
+    {
+      "createdBy": 4,
+      "title": "Verkiezing",
+      "description": "Stemmen",
+      "image": "",
+      "categoryIds": [],
+      "location": "gouda",
+      "startTime": "2023-11-21T14:48",
+      "endTime": "2023-11-23T14:48",
+      "id": 6
+    },
+    {
+      "createdBy": 4,
+      "title": "Verkiezing",
+      "description": "Stemmen",
+      "image": "",
+      "categoryIds": [
+        []
+      ],
+      "location": "gouda",
+      "startTime": "2023-11-21T14:48",
+      "endTime": "2023-11-23T14:48",
+      "id": 7
+    },
+    {
+      "createdBy": 4,
+      "title": "Verkiezin",
+      "description": "Lopen en verkiezen?",
+      "image": "",
+      "categoryIds": [],
+      "location": "gouda",
+      "startTime": "2023-11-21T14:57",
+      "endTime": "2023-12-03T17:57",
+      "id": 8
     }
   ],
   "categories": [
@@ -83,6 +134,38 @@
     {
       "name": "relaxation",
       "id": 3
+    },
+    {
+      "name": "Stemmen",
+      "id": 4
+    },
+    {
+      "name": " demo",
+      "id": 5
+    },
+    {
+      "name": " pizza",
+      "id": 6
+    },
+    {
+      "name": "",
+      "id": 7
+    },
+    {
+      "name": "",
+      "id": 8
+    },
+    {
+      "name": "Verkiezing",
+      "id": 9
+    },
+    {
+      "name": " stemmen",
+      "id": 10
+    },
+    {
+      "name": " lopen",
+      "id": 11
     }
   ]
 }

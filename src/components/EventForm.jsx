@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { checkCategoryExists, getCategoryId } from "../functions/checkData";
 
 export default function EventFrom({ userName, userId }) {
@@ -6,12 +6,19 @@ export default function EventFrom({ userName, userId }) {
   const [title, setTitle] = useState("");
   const [description, setDiscription] = useState("");
   const [image, setImage] = useState("");
-  const [categoryName, setCategoryName] = useState("");
+  const [categoryName, setCategoryName] = useState([""]);
   const [location, setLocation] = useState("");
   const [startTime, setStartTime] = useState("");
   const [endTime, setEndTime] = useState("");
-  const [categoryId, setCategoryId] = useState("");
+  const [categoryId, setCategoryId] = useState([]);
+  const [rawCategoryInput, setRawCategoryInput] = useState("");
 
+  const handleRawCatInputChange = (e) => {
+    setRawCategoryInput(e.target.value);
+  };
+
+  {
+    /** 
   async function updateCategoryId(categoryName) {
     setCategoryName(categoryName);
     const categorie = {
@@ -37,12 +44,81 @@ export default function EventFrom({ userName, userId }) {
       console.log("state: " + categoryId);
     }
   }
+
+
+  useEffect(() => {
+    const updateCategoryId = async () => {
+      let newCategoryIds = [];
+      for (const name of categoryName) {
+        const categoryExists = await checkCategoryExists(name);
+        if (!categoryExists) {
+          try {
+            const response = await fetch(`http://localhost:8000/categories`, {
+              method: "POST",
+              headers: { "content-Type": "application/json" },
+              body: JSON.stringify({ name }),
+            });
+            if (!response.ok) {
+              throw new Error(`HTTP error! status: ${response.status}`);
+            }
+            const newCategory = await response.json();
+            newCategoryIds.push(newCategory.id);
+          } catch (error) {
+            console.log(
+              "A problem occurred with your fetch operation: ",
+              error
+            );
+          }
+        }
+      }
+      setCategoryId(newCategoryIds);
+      console.log(categoryId);
+    };
+
+    if (categoryName && categoryName.length > 0) {
+      updateCategoryId();
+    }
+  }, [categoryName]);
+  */
+  }
+  const updateCategoryId = async () => {
+    let newCategoryIds = [];
+    for (const name of categoryName) {
+      const categoryExists = await checkCategoryExists(name);
+      if (!categoryExists) {
+        try {
+          const response = await fetch(`http://localhost:8000/categories`, {
+            method: "POST",
+            headers: { "content-Type": "application/json" },
+            body: JSON.stringify({ name }),
+          });
+          if (!response.ok) {
+            throw new Error(`HTTP error! status: ${response.status}`);
+          }
+          const newCategory = await response.json();
+          newCategoryIds.push(newCategory.id);
+        } catch (error) {
+          console.log("A problem occurred with your fetch operation: ", error);
+        }
+      }
+    }
+    setCategoryId(newCategoryIds);
+  };
+
+  useEffect(() => {
+    if (categoryName && categoryName.length > 0) {
+      updateCategoryId();
+    }
+  }, [categoryName]);
+
   const handleImage = (e) => {
     setImage(e.target.value || "https://picsum.photos/seed/picsum/200/300");
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setCategoryName(rawCategoryInput.split(","));
+    await updateCategoryId();
 
     const events = {
       createdBy: userId,
@@ -132,9 +208,10 @@ export default function EventFrom({ userName, userId }) {
         Category
         <input
           type="text"
+          required
           name="categories"
-          value={categoryName}
-          onSubmit={(e) => updateCategoryId(e.target.value)}
+          value={rawCategoryInput}
+          onChange={handleRawCatInputChange}
         />
         <label>Location</label>
         <input
