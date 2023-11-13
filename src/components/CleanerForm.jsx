@@ -40,7 +40,7 @@ export const CleanerForm = () => {
 
   const handleChange = (e) => {
     dispatch({
-      type: "CHANGE_INPUT",
+      type: "UPDATE_EVENTS",
       payload: { name: e.target.name, value: e.target.value },
     });
   };
@@ -48,7 +48,7 @@ export const CleanerForm = () => {
   const handleCats = (e) => {
     const tags = e.target.value.split(",");
     tags.forEach((tag) => {
-      dispatch({ type: "ADD_TAG", payload: tag });
+      dispatch({ type: "UPDATE_CATEGORIES", payload: tag });
     });
   };
 

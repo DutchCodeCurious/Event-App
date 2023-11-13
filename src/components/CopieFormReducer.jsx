@@ -16,20 +16,20 @@ export const INITIAL_STATE = {
 
 export const formReducer = (state, action) => {
   switch (action.type) {
-    case "CHANGE_INPUT":
+    case "UPDATE_EVENTS":
       return {
         ...state,
-        [action.payload.name]: action.payload.value,
+        events: {
+          ...state.events,
+          ...action.payload,
+        },
       };
-    case "ADD_TAG":
+    case "UPDATE_CATEGORIES":
       return {
         ...state,
-        categories: [...state.categories, action.payload],
-      };
-    case "REMOVE_TAG":
-      return {
-        ...state,
-        category: state.category.filter((cat) => cat !== action.payload),
+        categories: Array.isArray(action.payload)
+          ? action.payload.map((cat) => ({ name: cat }))
+          : [],
       };
 
     default:

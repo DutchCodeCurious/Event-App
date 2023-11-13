@@ -3,6 +3,7 @@ import EventFrom from "../components/EventForm";
 import UserCheckComponent from "../components/UserCheckFrom";
 import { UserCard } from "../components/UserCard";
 import { userLoader } from "../components/UserCheckFrom";
+import FormCopie from "../components/CopieForm";
 
 export default function Form() {
   const [showUserCheck, setShowUserCheck] = useState(true);
@@ -50,7 +51,7 @@ export default function Form() {
           <button onClick={handleCreate}>Create event</button>
         </div>
       )}
-      {showForm && <EventFrom userName={userName} userId={userId} />}
+      {showForm && <FormCopie userName={userName} userId={userId} />}
     </div>
   );
 }
