@@ -1,5 +1,6 @@
 import { Tag } from "@chakra-ui/react";
 import { useLoaderData } from "react-router-dom";
+import { UserCard } from "../components/UserCard";
 
 export default function EventDetails() {
   //   const { id } = useParams();
@@ -36,6 +37,7 @@ export const eventDetailsLoader = async ({ params }) => {
   }
 
   const event = await eventRes.json();
+
   const userRes = await fetch(`http://localhost:8000/users/${event.createdBy}`);
 
   if (!userRes.ok) {

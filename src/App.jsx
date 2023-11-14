@@ -13,6 +13,8 @@ import Home from "./pages/Home";
 import Events from "./pages/Events";
 import EventDetails, { eventDetailsLoader } from "./pages/EventDetails";
 import Form from "./pages/Form";
+import Login from "./pages/Login";
+import UserPage from "./pages/UserPage";
 import UserCheckComponent, { userLoader } from "./components/UserCheckFrom";
 
 //layout
@@ -24,6 +26,8 @@ const router = createBrowserRouter(
   createRoutesFromElements(
     <Route path="/" element={<RootLayout />}>
       <Route index element={<Home />} />
+      <Route path="login" element={<Login />} />
+      <Route path="user" element={<UserPage />} />
       <Route path="events/form" element={<FormLayout />}>
         <Route index element={<Form />} loader={userLoader} />
       </Route>

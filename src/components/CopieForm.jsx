@@ -1,6 +1,7 @@
 import React, { useReducer, useRef, useEffect } from "react";
 import { updateCategories, getCategoryId } from "../functions/checkData";
 import { formReducer, INITIAL_STATE } from "./CopieFormReducer";
+import defaultEvent from "../images/defaultEvent.png";
 
 const FormCopie = ({ userName, userId }) => {
   const [state, dispatch] = useReducer(formReducer, INITIAL_STATE);
@@ -53,18 +54,23 @@ const FormCopie = ({ userName, userId }) => {
   useEffect(() => {
     dispatch({
       type: "UPDATE_EVENTS",
-      payload: { createdById: userId },
+      payload: { createdBy: userId },
     });
   }, [userId]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
 
+    if (state.events.image === "") {
+      state.events.image = defaultEvent;
+    }
+
     fetch(`http://localhost:8000/events`, {
       method: "POST",
       headers: { "content-Type": "application/json" },
       body: JSON.stringify(state.events),
     });
+    console.log("new event is made");
   };
   return (
     <div>

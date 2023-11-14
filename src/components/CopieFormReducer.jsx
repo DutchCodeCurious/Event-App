@@ -1,6 +1,6 @@
 export const INITIAL_STATE = {
   events: {
-    createdById: "",
+    createdBy: "",
     title: "",
     description: "",
     image: "",

@@ -9,6 +9,16 @@
       "id": 2,
       "name": "Jane Bennett",
       "image": "https://global-uploads.webflow.com/5eecfecbe625d195e35b89f2/624bfb401d7131c760ca1c63_Elieska%20Lensink.jpg"
+    },
+    {
+      "name": "Joppe Petit",
+      "image": "/src/images/man.png",
+      "id": 3
+    },
+    {
+      "name": "Klaas Test",
+      "image": "/src/images/woman.png",
+      "id": 4
     }
   ],
   "events": [
@@ -47,7 +57,7 @@
     },
     {
       "id": 4,
-      "createdBy": 5,
+      "createdBy": 2,
       "title": "Yoga",
       "description": "It's a bit of a stretch.",
       "image": "https://ymcasouthflorida.org/wp-content/uploads/2019/12/AA2I8910-scaled.jpg",
